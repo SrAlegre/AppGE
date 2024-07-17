@@ -34,20 +34,16 @@
         </li>
       </ul>
     </nav>
-    <div  class="layout">
-
+    <div class="layout">
       <div id="Cadastro" class="conteiner">
-
         <div class="switch-container">
           <span class="label-left">Pessoa</span>
           <label class="switch">
-            <input id="selectRegister" type="checkbox">
+            <input id="selectRegister" type="checkbox" />
             <span class="slider"></span>
           </label>
           <span class="label-right">Produto</span>
         </div>
-        
-        
 
         <h1>Registro</h1>
         <form id="registerForm" action="register">
@@ -363,38 +359,37 @@
             >
           </div>
           <h3>Serviço:</h3>
-                <div class="produtos">
-                    <div class="product-selection">
-                        <select id="product-dropdown">
-                            <option value="Produto1,10,MaterialA">Produto1</option>
-                            <option value="Produto2,20,MaterialB">Produto2</option>
-                            <option value="Produto3,30,MaterialC">Produto3</option>
-                        </select>
-                        <div class="quantity-selector">
-                            <button id="decrement">-</button>
-                            <span id="quantity">1</span>
-                            <button id="increment">+</button>
-                        </div>
-                        <button type="button" id="add-product">Adicionar</button>
-                    </div>
+          <div class="produtos">
+            <div class="product-selection">
+              <select id="product-dropdown">
+                <option value="Produto1,10,MaterialA">Produto1</option>
+                <option value="Produto2,20,MaterialB">Produto2</option>
+                <option value="Produto3,30,MaterialC">Produto3</option>
+              </select>
+              <div class="quantity-selector">
+                <button id="decrement">-</button>
+                <span id="quantity">1</span>
+                <button id="increment">+</button>
+              </div>
+              <button type="button" id="add-product">Adicionar</button>
+            </div>
 
-                    <table id="product-table">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Preço</th>
-                                <th>Material</th>
-                                <th>Quantidade</th>
-                                <th>Remover</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Produtos adicionados serão inseridos aqui -->
-                        </tbody>
-                    </table>
-                </div>
+            <table id="product-table">
+              <thead>
+                <tr>
+                  <th>Nome</th>
+                  <th>Preço</th>
+                  <th>Material</th>
+                  <th>Quantidade</th>
+                  <th>Remover</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Produtos adicionados serão inseridos aqui -->
+              </tbody>
+            </table>
+          </div>
 
-              
           <div class="form__group">
             <input type="submit" value="Enviar" class="btn-submit" />
           </div>
@@ -412,44 +407,58 @@
             />
             <label for="joia" class="form__label">Joia</label>
           </div>
-          <div class="form__group field">
-            <input
-              type="input"
-              class="form__field"
-              placeholder="PreçoATK"
-              name="valorAtk"
-              id="valorATk"
-              required
-            />
-            <label for="valorATk" class="form__label">Preço de atacado</label>
-            
+          <div class="numeros">
+            <div class="form__group field input-container">
+              <label for="valorAtk" class="form__label">Preço de atacado</label>
+              <input
+                type="text"
+                class="form__field valorAtk"
+                placeholder="Preço atacado"
+                name="valorAtk"
+                id="valorAtk"
+                required
+                step="1.0"
+                min="0,00"
+                max="999,999"
+                value="0,00"
+                maxlength="10"
+                oninput="formatarPreco(this)"
+              />
+            </div>
+            <div class="form__group field input-container">
+              <label for="valorCliente" class="form__label">Preço cliente</label>
+              <input
+                type="text"
+                class="form__field"
+                placeholder="Preço"
+                name="valorCliente"
+                id="valorCliente"
+                required
+                step="1.0"
+                
+                min="0,00"
+                max="999,999"
+                value="0,00"
+                maxlength="10"
+                oninput="formatarPreco(this)"
+              />
+            </div>
+            <div class="form__group field">
+              <label for="quantidade" class="form__label">Quantidade de Joias</label>
+              <input
+                type="number"
+                class="form__field"
+                placeholder="Quantidade"
+                name="quantidade"
+                id="quantidade"
+                min="1"
+                step="1"
+                required
+                value="1"
+              />
+            </div>
           </div>
 
-          <div class="form__group field">
-            <input
-              type="input"
-              class="form__field"
-              placeholder="Preço"
-              name="valor"
-              id="valor"
-              required
-            />
-            <label for="valor" class="form__label">Preço</label>
-            
-          </div>
-          <div class="form__group field">
-            <input
-              type="number"
-              class="form__field"
-              placeholder="Quantidade"
-              name="quantidade"
-              id="quantidade"
-              min="1"
-              step="1"
-              required
-            />
-            <label for="quantidade" class="form__label">Quantidade de Joias</label>
-          </div>
           <div class="form__group field">
             <input
               type="input"

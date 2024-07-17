@@ -14,7 +14,7 @@
   --color-12: #468585;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playwrite+CU:wght@100..400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playwrite+CU:wght@100..400&display=swap");
 
 * {
   margin: 0;
@@ -36,7 +36,7 @@ html, body {
 
 .conteiner {
   margin: 30px;
-  margin-left: calc(20vw + 30px); /* Adiciona margem à esquerda para não sobrepor a navbar */
+  margin-left: calc(20vw + 30px);
 }
 
 .Navbar {
@@ -91,11 +91,10 @@ html, body {
   color: var(--color-8);
 }
 
-/* Contêiner para centralizar os rótulos e o switch */
 .switch-container {
   display: flex;
   align-items: center;
-  justify-items:center ;
+  justify-items: center;
   font-size: 17px;
   margin-bottom: 30px;
   padding-left: 20%;
@@ -105,10 +104,9 @@ html, body {
 .switch-container .label-right {
   font-size: 1em;
   color: #666;
-  margin: 0 1em; /* Espaçamento entre os rótulos e o switch */
+  margin: 0 1em;
 }
 
-/* Estilos para o switch */
 .switch {
   position: relative;
   display: inline-block;
@@ -116,21 +114,19 @@ html, body {
   height: 2em;
 }
 
-/* Esconder checkbox HTML padrão */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* O slider */
 .slider {
   position: absolute;
   cursor: pointer;
   inset: 0;
   background: #d4acfb;
   border-radius: 50px;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .slider:before {
@@ -142,11 +138,10 @@ html, body {
   bottom: 0.3em;
   background-color: white;
   border-radius: 50px;
-  box-shadow: 0 0px 20px rgba(0,0,0,0.4);
+  box-shadow: 0 0px 20px rgba(0, 0, 0, 0.4);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Quando o checkbox está marcado */
 .switch input:checked + .slider {
   background: #b84fce;
 }
@@ -161,8 +156,6 @@ html, body {
   height: 2em;
   bottom: 0;
 }
-
-
 
 .conteiner h1 {
   color: var(--color-6);
@@ -247,11 +240,11 @@ h2, h3 {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  margin-right: 20px; /* Espaçamento entre os inputs de rádio */
+  margin-right: 20px;
 }
 
 .form__radio-input + .form__radio-label::before {
-  content: '';
+  content: "";
   display: inline-block;
   width: 20px;
   height: 20px;
@@ -266,7 +259,6 @@ h2, h3 {
   background-color: var(--color-6);
   border-color: var(--color-5);
 }
-
 
 .btn-submit {
   display: inline-block;
@@ -286,7 +278,6 @@ h2, h3 {
   background-color: #772ce8;
 }
 
-/* Seu CSS existente */
 .product-selection {
   display: flex;
   align-items: center;
@@ -329,3 +320,30 @@ button {
   cursor: pointer;
 }
 
+.numeros {
+  display: flex;
+  justify-content: start;
+  width: 50vw;
+  margin: 30px;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+  margin: 10px 20px 10px 0; /* Espaçamento à direita para separar os inputs */
+}
+
+.input-container::before {
+  content: "R$";
+  position: absolute;
+  left: 5px;
+  top: 65%;
+  transform: translateY(-50%);
+  color: var(--color-5);
+  font-size: 20px;
+}
+
+#valorAtk, #valorCliente {
+  padding-left: 50px;
+  width: 120px;
+}
