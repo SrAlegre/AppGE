@@ -1,0 +1,331 @@
+:root {
+  --color-1: #b3c8cf;
+  --color-2: #bed7dc;
+  --color-3: #f1eedc;
+  --color-4: #e5ddc5;
+  --color-4-1: rgba(255, 255, 255, 0.082);
+  --color-5: #5a639c;
+  --color-6: #7776b3;
+  --color-7: #9b86bd;
+  --color-8: #e2bbe9;
+  --color-9: #def9c4;
+  --color-10: #9cdba6;
+  --color-11: #50b498;
+  --color-12: #468585;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Playwrite+CU:wght@100..400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lexend", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+html, body {
+  height: 100%;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.conteiner {
+  margin: 30px;
+  margin-left: calc(20vw + 30px); /* Adiciona margem à esquerda para não sobrepor a navbar */
+}
+
+.Navbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: var(--color-5);
+  width: 20vw;
+  max-width: 30%;
+  height: 100%;
+  box-shadow: 10px 0px 10px 0px #b6b6b6;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.Navbar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.Navbar li {
+  margin: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-bottom: 4px solid var(--color-4-1);
+}
+
+.Navbar a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-8);
+  padding: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.Navbar a:hover {
+  background-color: var(--color-6);
+}
+
+.Navbar h1 {
+  color: var(--color-8);
+  margin: 20px;
+}
+
+.Navbar span {
+  margin-right: 10px;
+  color: var(--color-8);
+}
+
+/* Contêiner para centralizar os rótulos e o switch */
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-items:center ;
+  font-size: 17px;
+  margin-bottom: 30px;
+  padding-left: 20%;
+}
+
+.switch-container .label-left,
+.switch-container .label-right {
+  font-size: 1em;
+  color: #666;
+  margin: 0 1em; /* Espaçamento entre os rótulos e o switch */
+}
+
+/* Estilos para o switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 3.5em;
+  height: 2em;
+}
+
+/* Esconder checkbox HTML padrão */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* O slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #d4acfb;
+  border-radius: 50px;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  left: 0.3em;
+  bottom: 0.3em;
+  background-color: white;
+  border-radius: 50px;
+  box-shadow: 0 0px 20px rgba(0,0,0,0.4);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Quando o checkbox está marcado */
+.switch input:checked + .slider {
+  background: #b84fce;
+}
+
+.switch input:focus + .slider {
+  box-shadow: 0 0 1px #b84fce;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(1.6em);
+  width: 2em;
+  height: 2em;
+  bottom: 0;
+}
+
+
+
+.conteiner h1 {
+  color: var(--color-6);
+}
+
+h2, h3 {
+  border-top: 4px solid var(--color-4-1);
+  margin-top: 20px;
+}
+
+.form__group {
+  position: relative;
+  padding: 15px 0 0;
+  margin-top: 10px;
+  width: 100vh;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid var(--color-6);
+  outline: 0;
+  font-size: 1.3rem;
+  color: var(--color-8);
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.form__field::placeholder {
+  color: transparent;
+}
+
+.form__field:placeholder-shown ~ .form__label {
+  font-size: 1.3rem;
+  cursor: text;
+  top: 20px;
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: var(--color-6);
+}
+
+.form__field:focus ~ .form__label {
+  top: 0;
+  display: block;
+  font-size: 1rem;
+  color: var(--color-5);
+  font-weight: 700;
+}
+
+.form__field:focus {
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, var(--color-5), var(--color-7));
+  border-image-slice: 1;
+}
+
+.form__field:required,
+.form__field:invalid {
+  box-shadow: none;
+}
+
+.form__radio-group {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.form__radio-input {
+  display: none;
+}
+
+.form__radio-input + .form__radio-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 20px; /* Espaçamento entre os inputs de rádio */
+}
+
+.form__radio-input + .form__radio-label::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid var(--color-6);
+  border-radius: 50%;
+  background-color: var(--color-3);
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.form__radio-input:checked + .form__radio-label::before {
+  background-color: var(--color-6);
+  border-color: var(--color-5);
+}
+
+
+.btn-submit {
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 20px;
+  height: 50px;
+  background-color: #9147ff;
+  color: white;
+  padding: 0 20px;
+}
+
+.btn-submit:hover {
+  background-color: #772ce8;
+}
+
+/* Seu CSS existente */
+.product-selection {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+}
+
+.quantity-selector button {
+  padding: 5px;
+}
+
+#quantity {
+  margin: 0 10px;
+  width: 20px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+button {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+

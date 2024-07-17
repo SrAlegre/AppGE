@@ -1,0 +1,26 @@
+{
+    "Nome": "",
+    "Data_de_nascimento": "",
+    "CPF": "",
+    "telefone": "",
+    "animinese": "",
+    "Perfuração": "",
+    "Material_da_joia": ""
+  }
+  
+
+  
+  display: inline-block;
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 4px;
+  font-size: 13px;
+  height: 30px;
+  background-color: #9147ff;
+  color: white;
+  padding: 0 20px;
+  :hover {
+      background-color: #772ce8;
+  }
