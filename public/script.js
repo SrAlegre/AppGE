@@ -1,4 +1,3 @@
-registerJoia;
 // Função para mostrar um elemento
 function showElement(id) {
   const element = document.getElementById(id);
@@ -69,7 +68,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const newRow = productTable.insertRow();
     newRow.innerHTML = `
           <td>${productName}</td>
-          <td>${productPrice}</td>
+          <td><input
+                type="text"
+                class="form__field valorAtk"
+                id="valorAtk"
+                step="1.0"
+                min="0,00"
+                max="999,999"
+                value=${productPrice}
+                maxlength="10"
+                oninput="formatarPreco(this)"
+              /></td>
           <td>${productMaterial}</td>
           <td>${quantity}</td>
           <td><button type="button" class="delete-button">Remover</button></td>
@@ -111,12 +120,10 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateFormJoia() {
     const formData = new FormData(registerJoia);
     const formObject = Object.fromEntries(formData.entries());
-    data=formObject;
-    
+    data = formObject;
   }
 
   registerJoia.addEventListener("submit", async function (event) {
-
     event.preventDefault();
     await updateFormJoia(); // Garante que os dados estão atualizados
 
@@ -137,6 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
     }
+    document.getElementById("registerJoia").reset();
   });
 
   // Impedir envio padrão do formulário e atualizar dados no console
@@ -161,6 +169,9 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
     }
+     productList = [];
+    document.getElementById("registerForm").reset();
+
   });
 
   // Evitar validação automática ao clicar nos botões de incremento e decremento
@@ -176,32 +187,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
 function formatarPreco(input) {
   // Salva a posição atual do cursor
   const pos = input.selectionStart;
-  
+
   // Remove todos os caracteres não numéricos
-  let preco = input.value.replace(/\D/g, '');
+  let preco = input.value.replace(/\D/g, "");
 
   // Remove zeros à esquerda
-  preco = preco.replace(/^0+/, '');
+  preco = preco.replace(/^0+/, "");
 
   // Se o preço é vazio, não faz nada
-  if (preco === '') {
-      input.value = '';
-      return;
+  if (preco === "") {
+    input.value = "";
+    return;
   }
 
   // Formata o preço conforme a quantidade de dígitos
   if (preco.length === 1) {
-      input.value = '0,0' + preco;
+    input.value = "0,0" + preco;
   } else if (preco.length === 2) {
-      input.value = '0,' + preco;
+    input.value = "0," + preco;
   } else {
-      let parteInteira = preco.slice(0, -2);
-      let parteDecimal = preco.slice(-2);
-      input.value = parteInteira + ',' + parteDecimal;
+    let parteInteira = preco.slice(0, -2);
+    let parteDecimal = preco.slice(-2);
+    input.value = parteInteira + "," + parteDecimal;
   }
 
   // Ajusta a posição do cursor para o final
