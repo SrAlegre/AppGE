@@ -1,0 +1,50 @@
+-- Criação da base de dados
+CREATE DATABASE appge;
+USE appge;
+
+-- Criação da tabela anaminese com coluna id_anaminese como AUTO_INCREMENT
+CREATE TABLE anaminese (
+    id_anaminese INTEGER AUTO_INCREMENT PRIMARY KEY,
+    Alergia VARCHAR(255),
+    pele_cicatrizacao VARCHAR(255),
+    cirugia VARCHAR(255),
+    hepatites BOOLEAN,
+    cardiaco BOOLEAN,
+    medicamento VARCHAR(255),
+    epilepsia BOOLEAN,
+    hemofilia BOOLEAN,
+    pressao VARCHAR(50)
+);
+
+-- Criação da tabela Cliente com coluna id_pessoa como AUTO_INCREMENT e FK para anaminese
+CREATE TABLE Cliente (
+    id_pessoa INTEGER AUTO_INCREMENT PRIMARY KEY,
+    Nome VARCHAR(255),
+    CPF VARCHAR(255),
+    Data_Nascimento DATE,
+    Telefone VARCHAR(255),
+    Endereco VARCHAR(255),
+    instagram VARCHAR(255),
+    fk_anaminese_id_anaminese INTEGER,
+    conheceu VARCHAR(255),
+    FOREIGN KEY (fk_anaminese_id_anaminese) REFERENCES anaminese (id_anaminese) ON DELETE CASCADE
+);
+
+-- Criação da tabela produto com coluna id_produto como AUTO_INCREMENT
+CREATE TABLE produto (
+    id_produto INTEGER AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100),
+    material VARCHAR(100),
+    preco FLOAT,
+    quantidade INTEGER
+);
+
+-- Criação da tabela tem com coluna id_tem como AUTO_INCREMENT e FKs para Cliente e produto
+CREATE TABLE tem (
+    id_tem INTEGER AUTO_INCREMENT PRIMARY KEY,
+    fk_Cliente_id_pessoa INTEGER,
+    fk_produto_id_produto INTEGER,
+    quantidade INTEGER,
+    FOREIGN KEY (fk_Cliente_id_pessoa) REFERENCES Cliente (id_pessoa) ON DELETE SET NULL,
+    FOREIGN KEY (fk_produto_id_produto) REFERENCES produto (id_produto) ON DELETE SET NULL
+);

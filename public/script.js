@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
     await updateFormJoia(); // Garante que os dados estão atualizados
 
     // Enviar os dados para o backend
-    const url = "http://localhost:3000/register"; // URL do seu endpoint
+    const url = "http://localhost:3000/registerJoia"; // URL do seu endpoint
     const options = {
       method: "POST",
       headers: {
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
     await updateFormData(); // Garante que os dados estão atualizados
 
     // Enviar os dados para o backend
-    const url = "http://localhost:3000/register"; // URL do seu endpoint
+    const url = "http://localhost:3000/registerPessoa"; // URL do seu endpoint
     const options = {
       method: "POST",
       headers: {
