@@ -63,26 +63,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const productInfo = productDropdown.value.split(",");
     const productName = productInfo[0];
     const productPrice = productInfo[1];
-    const productMaterial = productInfo[2];
 
     const newRow = productTable.insertRow();
     newRow.innerHTML = `
-          <td>${productName}</td>
-          <td><input
-                type="text"
-                class="form__field valorAtk"
-                id="valorAtk"
-                step="1.0"
-                min="0,00"
-                max="999,999"
-                value=${productPrice}
-                maxlength="10"
-                oninput="formatarPreco(this)"
-              /></td>
-          <td>${productMaterial}</td>
-          <td>${quantity}</td>
-          <td><button type="button" class="delete-button">Remover</button></td>
-      `;
+      <td>${productName}</td>
+      <td><input
+            type="text"
+            class="form__field valorAtk"
+            step="1.0"
+            min="0,00"
+            max="999,999"
+            value="${productPrice}"
+            maxlength="10"
+            oninput="formatarPreco(this)"
+          /></td>
+      <td>
+        <select class="material-dropdown">
+          <option value="Aço Cirúrgico">Aço Cirúrgico</option>
+          <option value="Titânio">Titânio</option>
+          <option value="Nenhum">Nenhum</option>
+        </select>
+      </td>
+      <td>${quantity}</td>
+      <td><button type="button" class="delete-button">Remover</button></td>
+    `;
 
     // Adicionar evento de clique no botão de remover
     newRow.querySelector(".delete-button").addEventListener("click", () => {
@@ -93,11 +97,29 @@ document.addEventListener("DOMContentLoaded", () => {
       updateFormData();
     });
 
+    // Adicionar evento de input para atualizar o preço do produto
+    newRow.querySelector('.valorAtk').addEventListener('input', (event) => {
+      const newPrice = event.target.value;
+      productList = productList.map(product => 
+        product.name === productName ? { ...product, price: newPrice } : product
+      );
+      updateFormData();
+    });
+
+    // Adicionar evento de change para atualizar o material do produto
+    newRow.querySelector('.material-dropdown').addEventListener('change', (event) => {
+      const newMaterial = event.target.value;
+      productList = productList.map(product => 
+        product.name === productName ? { ...product, material: newMaterial } : product
+      );
+      updateFormData();
+    });
+
     // Adicionar produto à lista de produtos
     productList.push({
       name: productName,
       price: productPrice,
-      material: productMaterial,
+      material: "Aço Cirúrgico", // Valor padrão
       quantity: quantity,
     });
 
@@ -169,9 +191,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } catch (error) {
       console.error("Erro ao enviar dados:", error);
     }
-     productList = [];
+    productList = [];
     document.getElementById("registerForm").reset();
-
   });
 
   // Evitar validação automática ao clicar nos botões de incremento e decremento
