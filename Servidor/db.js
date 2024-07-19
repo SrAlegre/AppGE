@@ -134,6 +134,7 @@ function cadastrarCliente(cliente, callback) {
                     id_cliente,
                     id_produto,
                     produto.quantity,
+                    produto.local,
                     (err, id_servico) => {
                       if (err) {
                         console.error("Erro ao associar produto ao serviço:", err);
@@ -174,16 +175,16 @@ function cadastrarCliente(cliente, callback) {
 
 
 // Função para Associar Produto ao Serviço (Serviço do Cliente)
-function associarProdutoServico(id_cliente, id_produto, quantidade, callback) {
+function associarProdutoServico(id_cliente, id_produto, quantidade,local, callback) {
   const insertServicoQuery = `
-    INSERT INTO servico (id_cliente, id_produto, quantidade)
-    VALUES (?, ?, ?)
+    INSERT INTO servico (id_cliente, id_produto, quantidade,local)
+    VALUES (?, ?, ?,?)
   `;
 
 
   connection.query(
     insertServicoQuery,
-    [id_cliente, id_produto, quantidade],
+    [id_cliente, id_produto, quantidade,local],
     (err, results) => {
       if (err) return callback(err);
       callback(null, results.insertId);

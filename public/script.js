@@ -135,6 +135,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     const productName = productInfo[0];
     const productPrice = productInfo[1];
     const productMaterial = productInfo[2];
+    const localInput = document.createElement("input");
+    localInput.type = "text";
+    localInput.className = "form__field local-input";
 
     const newRow = productTable.insertRow();
     newRow.innerHTML = `
@@ -163,6 +166,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         </select>
       </td>
       <td>${quantity}</td>
+      <td><input
+            type="text"
+            class="form__field local-input"
+          /></td>
       <td><button type="button" class="delete-button">Remover</button></td>
     `;
 
@@ -197,12 +204,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         updateFormData();
       });
 
+    // Adicionar evento de input para atualizar o local do produto
+    newRow.querySelector(".local-input").addEventListener("input", (event) => {
+      const newLocal = event.target.value;
+      productList = productList.map((product) =>
+        product.name === productName ? { ...product, local: newLocal } : product
+      );
+      updateFormData();
+    });
+
     // Adicionar produto à lista de produtos
     productList.push({
       name: productName,
       price: productPrice,
       material: productMaterial,
       quantity: quantity,
+      local: "",
     });
 
     // Resetar quantidade para 1
@@ -220,6 +237,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     formObject.servico = productList;
     data = formObject;
   }
+  
 
   function updateFormJoia() {
     const formData = new FormData(registerJoia);
