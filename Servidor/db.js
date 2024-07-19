@@ -52,6 +52,7 @@ function cadastrarProduto(produto, callback) {
 // Função para Cadastrar Cliente
 function cadastrarCliente(cliente, callback) {
   const {
+    name,
     CPF,
     birthdate,
     phone,
@@ -108,13 +109,13 @@ function cadastrarCliente(cliente, callback) {
 
       // Inserir cliente
       const insertClienteQuery = `
-      INSERT INTO cliente (cpf, data_de_aniversario, telefone, endereco, instagram, como_conheceu, id_anaminese)
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO cliente (nome,cpf, data_de_aniversario, telefone, endereco, instagram, como_conheceu, id_anaminese)
+      VALUES (?,?, ?, ?, ?, ?, ?, ?)
     `;
 
       connection.query(
         insertClienteQuery,
-        [CPF, birthdate, phone, address, Instagram, conheceu, id_anaminese],
+        [name,CPF, birthdate, phone, address, Instagram, conheceu, id_anaminese],
         (err, results) => {
           if (err) return callback(err);
 

@@ -461,15 +461,22 @@
 
           <div class="form__group field">
             <input
-              type="input"
-              class="form__field"
-              placeholder="Material"
-              name="material"
-              id="material"
-              required
+                type="input"
+                class="form__field"
+                placeholder="Material"
+                name="material"
+                id="material"
+                required
+                autocomplete="off"
             />
             <label for="material" class="form__label">Material</label>
-          </div>
+            <div id="dropdownMenu" class="dropdown-content">
+                <div class="option" data-value="Aço">Aço</div>
+                <div class="option" data-value="Titânio">Titânio</div>
+                <div class="option" data-value="Silicone">Silicone</div>
+                <div class="option" data-value="Bioflex">Bioflex</div>
+            </div>
+        </div>
           <div class="form__group">
             <input type="submit" value="Enviar" class="btn-submit" />
           </div>

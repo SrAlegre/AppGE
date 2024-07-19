@@ -14,6 +14,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   let quantity = 1;
   let productList = [];
 
+  const materialInput = document.getElementById("material");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const options = dropdownMenu.getElementsByClassName("option");
+
+  // Mostrar o dropdown quando o input é focado
+  materialInput.addEventListener("focus", () => {
+    dropdownMenu.style.display = "block";
+  });
+
+  // Esconder o dropdown quando o input perde o foco
+  materialInput.addEventListener("blur", () => {
+    setTimeout(() => {
+      dropdownMenu.style.display = "none";
+    }, 200); // Timeout para permitir clique nas opções
+  });
+
+  // Filtrar as opções com base na entrada do usuário
+  materialInput.addEventListener("input", () => {
+    const filter = materialInput.value.toLowerCase();
+    Array.from(options).forEach((option) => {
+      const text = option.textContent || option.innerText;
+      if (text.toLowerCase().indexOf(filter) > -1) {
+        option.style.display = "";
+      } else {
+        option.style.display = "none";
+      }
+    });
+  });
+
+  // Atualizar o valor do input e esconder o dropdown quando uma opção é clicada
+  Array.from(options).forEach((option) => {
+    option.addEventListener("mousedown", (event) => {
+      materialInput.value = event.target.getAttribute("data-value");
+      dropdownMenu.style.display = "none";
+    });
+  });
+
   // Função para mostrar um elemento
   function showElement(id) {
     const element = document.getElementById(id);

@@ -343,7 +343,38 @@ button {
   font-size: 20px;
 }
 
-#preco_de_atacado, #preco {
+#preco_de_atacado, #preco, #quantidade {
   padding-left: 50px;
   width: 120px;
+}
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.dropdown-content .option {
+  padding: 12px 16px;
+  cursor: pointer;
+}
+
+.dropdown-content .option:hover {
+  background-color: #f1f1f1;
+}
+
+/* Estilo para garantir que o menu dropdown apareça logo abaixo do input */
+.form__group {
+  position: relative;
+}
+
+#material,#dropdownMenu{
+  width: 50%;
 }
