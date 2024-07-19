@@ -1,32 +1,4 @@
-// Função para mostrar um elemento
-function showElement(id) {
-  const element = document.getElementById(id);
-  element.style.display = "block";
-}
-
-// Função para esconder um elemento
-function hideElement(id) {
-  const element = document.getElementById(id);
-  element.style.display = "none";
-}
-
-// Alternar exibição com base no estado do switch
-const switchElement = document.getElementById("selectRegister");
-
-switchElement.addEventListener("change", function () {
-  if (switchElement.checked) {
-    showElement("registerForm");
-    hideElement("registerJoia");
-  } else {
-    hideElement("registerForm");
-    showElement("registerJoia");
-  }
-});
-
-// Inicialmente esconder o elemento (opcional)
-hideElement("registerForm");
-
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const productDropdown = document.getElementById("product-dropdown");
   const quantityElement = document.getElementById("quantity");
   const incrementButton = document.getElementById("increment");
@@ -36,13 +8,69 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("product-table")
     .getElementsByTagName("tbody")[0];
   const registerForm = document.getElementById("registerForm");
-
   const registerJoia = document.getElementById("registerJoia");
-
-  let data = "";
+  const switchElement = document.getElementById("selectRegister");
 
   let quantity = 1;
   let productList = [];
+
+  // Função para mostrar um elemento
+  function showElement(id) {
+    const element = document.getElementById(id);
+    element.style.display = "block";
+  }
+
+  // Função para esconder um elemento
+  function hideElement(id) {
+    const element = document.getElementById(id);
+    element.style.display = "none";
+  }
+
+  // Alternar exibição com base no estado do switch
+  switchElement.addEventListener("change", function () {
+    if (switchElement.checked) {
+      showElement("registerForm");
+      hideElement("registerJoia");
+    } else {
+      hideElement("registerForm");
+      showElement("registerJoia");
+    }
+  });
+
+  // Inicialmente esconder o elemento registerForm
+  hideElement("registerForm");
+
+  // Função para buscar produtos do servidor
+  async function fetchProducts() {
+    try {
+      const response = await fetch("http://localhost:3000/products"); // URL do seu endpoint
+      const products = await response.json();
+      console.log(products);
+      // Limpar o dropdown antes de adicionar novos itens
+      productDropdown.innerHTML = "";
+
+      // Adicionar a opção padrão
+      const defaultOption = document.createElement("option");
+      defaultOption.textContent = "Selecione um produto";
+      defaultOption.disabled = true;
+      defaultOption.selected = false;
+      productDropdown.appendChild(defaultOption);
+
+      // Adicionar produtos ao dropdown
+      products.forEach((product) => {
+        const option = document.createElement("option");
+        option.value = `${product.nome},${product.preco},${product.material}`;
+        console.log(product.nome);
+        option.textContent = product.nome;
+        productDropdown.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Erro ao buscar produtos:", error);
+    }
+  }
+
+  // Buscar produtos ao carregar a página
+  await fetchProducts();
 
   // Incrementar quantidade
   incrementButton.addEventListener("click", () => {
@@ -60,9 +88,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Adicionar produto à tabela
   addButton.addEventListener("click", () => {
-    const productInfo = productDropdown.value.split(",");
+    const selectedOption = productDropdown.selectedOptions[0];
+    if (!selectedOption) {
+      alert("Por favor, selecione um produto.");
+      return;
+    }
+
+    const productInfo = selectedOption.value.split(",");
     const productName = productInfo[0];
     const productPrice = productInfo[1];
+    const productMaterial = productInfo[2];
 
     const newRow = productTable.insertRow();
     newRow.innerHTML = `
@@ -70,18 +105,24 @@ document.addEventListener("DOMContentLoaded", () => {
       <td><input
             type="text"
             class="form__field valorAtk"
-            step="1.0"
-            min="0,00"
-            max="999,999"
-            value="${productPrice}"
+            step="0.01"
+            min="0.00"
+            max="999.99"
+            value="${(productPrice * quantity).toFixed(2)}"
             maxlength="10"
             oninput="formatarPreco(this)"
           /></td>
       <td>
         <select class="material-dropdown">
-          <option value="Aço Cirúrgico">Aço Cirúrgico</option>
-          <option value="Titânio">Titânio</option>
-          <option value="Nenhum">Nenhum</option>
+          <option value="Aço Cirúrgico" ${
+            productMaterial === "Aço Cirúrgico" ? "selected" : ""
+          }>Aço Cirúrgico</option>
+          <option value="Titânio" ${
+            productMaterial === "Titânio" ? "selected" : ""
+          }>Titânio</option>
+          <option value="Nenhum" ${
+            productMaterial === "Nenhum" ? "selected" : ""
+          }>Nenhum</option>
         </select>
       </td>
       <td>${quantity}</td>
@@ -98,28 +139,32 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Adicionar evento de input para atualizar o preço do produto
-    newRow.querySelector('.valorAtk').addEventListener('input', (event) => {
+    newRow.querySelector(".valorAtk").addEventListener("input", (event) => {
       const newPrice = event.target.value;
-      productList = productList.map(product => 
+      productList = productList.map((product) =>
         product.name === productName ? { ...product, price: newPrice } : product
       );
       updateFormData();
     });
 
     // Adicionar evento de change para atualizar o material do produto
-    newRow.querySelector('.material-dropdown').addEventListener('change', (event) => {
-      const newMaterial = event.target.value;
-      productList = productList.map(product => 
-        product.name === productName ? { ...product, material: newMaterial } : product
-      );
-      updateFormData();
-    });
+    newRow
+      .querySelector(".material-dropdown")
+      .addEventListener("change", (event) => {
+        const newMaterial = event.target.value;
+        productList = productList.map((product) =>
+          product.name === productName
+            ? { ...product, material: newMaterial }
+            : product
+        );
+        updateFormData();
+      });
 
     // Adicionar produto à lista de produtos
     productList.push({
       name: productName,
       price: productPrice,
-      material: "Aço Cirúrgico", // Valor padrão
+      material: productMaterial,
       quantity: quantity,
     });
 
@@ -135,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateFormData() {
     const formData = new FormData(registerForm);
     const formObject = Object.fromEntries(formData.entries());
-    formObject.produtos = productList;
+    formObject.servico = productList;
     data = formObject;
   }
 
@@ -173,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
   registerForm.addEventListener("submit", async function (event) {
     event.preventDefault();
     await updateFormData(); // Garante que os dados estão atualizados
+    console.log(JSON.stringify(data, null, 2));
 
     // Enviar os dados para o backend
     const url = "http://localhost:3000/registerPessoa"; // URL do seu endpoint
@@ -203,6 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
   decrementButton.addEventListener("click", (event) => {
     event.preventDefault();
   });
+
   addButton.addEventListener("click", (event) => {
     event.preventDefault();
   });

@@ -343,7 +343,7 @@ button {
   font-size: 20px;
 }
 
-#valorAtk, #valorCliente {
+#preco_de_atacado, #preco {
   padding-left: 50px;
   width: 120px;
 }

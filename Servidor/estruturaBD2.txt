@@ -1,0 +1,50 @@
+CREATE DATABASE IF NOT EXISTS appge;
+USE appge;
+
+-- Tabela de Produtos
+CREATE TABLE produtos (
+    id_produto INT AUTO_INCREMENT PRIMARY KEY,
+    material VARCHAR(255) NOT NULL,
+    preco DECIMAL(5,2) NOT NULL,
+    preco_de_atacado DECIMAL(5,2) NOT NULL,
+    quantidade INT NOT NULL
+);
+
+-- Tabela de Ficha de Anamnese
+CREATE TABLE ficha_de_anaminese (
+    id_anaminese INT AUTO_INCREMENT PRIMARY KEY,
+    alergia VARCHAR(255),
+    pele_cicatrizacao VARCHAR(255),
+    cirurgia VARCHAR(255),
+    IST BOOLEAN,
+    Hepatites BOOLEAN,
+    cardiaco_circulatorio BOOLEAN,
+    medicamento VARCHAR(255),
+    diabetes BOOLEAN,
+    epilepsia BOOLEAN,
+    hemofilia BOOLEAN,
+    pressao ENUM('normal', 'alta', 'baixa')
+);
+
+-- Tabela de Clientes
+CREATE TABLE cliente (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    cpf VARCHAR(11) NOT NULL,
+    data_de_aniversario DATE,
+    telefone VARCHAR(20),
+    endereco VARCHAR(255),
+    instagram VARCHAR(100),
+    como_conheceu VARCHAR(255),
+    id_anaminese INT,
+    FOREIGN KEY (id_anaminese) REFERENCES ficha_de_anaminese(id_anaminese)
+);
+
+-- Tabela de Serviços
+CREATE TABLE servico (
+    id_servico INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT,
+    id_produto INT,
+    quantidade INT,
+    FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);

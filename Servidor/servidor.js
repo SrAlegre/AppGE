@@ -10,15 +10,35 @@ app.use(express.json());
 app.post("/registerPessoa", (req, res) => {
   const formData = req.body;
   console.log(formData); // Exibe os dados recebidos do formulário no console
-  db.inserirCliente(formData);
-  res.status(200).json({ message: "Dados recebidos com sucesso!" });
+  db.cadastrarCliente(formData, (err) => {
+    if (err) {
+      console.error('Erro ao cadastrar cliente:', err);
+    } else {
+        res.status(200).json({ message: "Dados recebidos com sucesso!" });    }
+  }); 
 });
 
 app.post("/registerJoia", (req, res) => {
   const formData = req.body;
   console.log(formData); // Exibe os dados recebidos do formulário no console
-  res.status(200).json({ message: "Dados recebidos com sucesso!" });
+  db.cadastrarProduto(formData, (err) => {
+    if (err) {
+      console.error('Erro ao produto cliente:', err);
+    } else {
+        res.status(200).json({ message: "Dados recebidos com sucesso!" });    }
+  });  
 });
+
+
+app.get('/products', (req, res) => {
+    db.getProducts((err, products) => {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json(products);
+      }
+    });
+  });
 
 // Inicia o servidor
 app.listen(port, () => {
