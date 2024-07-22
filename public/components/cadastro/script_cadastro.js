@@ -1,3 +1,7 @@
+function cadastroON(){
+  
+console.log("oi cadastro")
+
 // Função para mostrar um elemento
 function showElement(id) {
     const element = document.getElementById(id);
@@ -310,35 +314,40 @@ function showElement(id) {
     });
   
   
-  function formatarPreco(input) {
-    // Salva a posição atual do cursor
-    const pos = input.selectionStart;
   
-    // Remove todos os caracteres não numéricos
-    let preco = input.value.replace(/\D/g, "");
-  
-    // Remove zeros à esquerda
-    preco = preco.replace(/^0+/, "");
-  
-    // Se o preço é vazio, não faz nada
-    if (preco === "") {
-      input.value = "";
-      return;
-    }
-  
-    // Formata o preço conforme a quantidade de dígitos
-    if (preco.length === 1) {
-      input.value = "0,0" + preco;
-    } else if (preco.length === 2) {
-      input.value = "0," + preco;
-    } else {
-      let parteInteira = preco.slice(0, -2);
-      let parteDecimal = preco.slice(-2);
-      input.value = parteInteira + "," + parteDecimal;
-    }
-  
-    // Ajusta a posição do cursor para o final
-    input.setSelectionRange(input.value.length, input.value.length);
-    //Fim Script cadastro
-    
+}
+function formatarPreco(input) {
+  // Salva a posição atual do cursor
+  const pos = input.selectionStart;
+
+  // Remove todos os caracteres não numéricos
+  let preco = input.value.replace(/\D/g, "");
+
+  // Remove zeros à esquerda
+  preco = preco.replace(/^0+/, "");
+
+  // Se o preço é vazio, não faz nada
+  if (preco === "") {
+    input.value = "";
+    return;
   }
+
+  // Formata o preço conforme a quantidade de dígitos
+  if (preco.length === 1) {
+    input.value = "0,0" + preco;
+  } else if (preco.length === 2) {
+    input.value = "0," + preco;
+  } else {
+    let parteInteira = preco.slice(0, -2);
+    let parteDecimal = preco.slice(-2);
+    input.value = parteInteira + "," + parteDecimal;
+  }
+
+  // Ajusta a posição do cursor para o final
+  //Fim Script cadastro
+  input.setSelectionRange(input.value.length, input.value.length);
+
+}
+
+
+ cadastroON();

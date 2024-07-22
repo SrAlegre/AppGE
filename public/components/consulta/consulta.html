@@ -1,0 +1,118 @@
+<div id="consulta" class="conteiner">
+  <!-- Switch para alternar entre Produto e Pessoa -->
+  <div class="switch-container">
+    <span class="label-left">Produto</span>
+    <label class="switch">
+      <input id="selectConsulta" type="checkbox" />
+      <span class="slider"></span>
+    </label>
+    <span class="label-right">Pessoa</span>
+  </div>
+
+  <!-- Formulário para Consulta de Pessoa -->
+  <div id="form-consulta-pessoa">
+    <h1>Consulta</h1>
+    <h2>Cliente:</h2>
+    <form id="consulta-form" class="form-group-container">
+      <div class="form__group field">
+        <input
+          type="text"
+          class="form__field"
+          placeholder="Nome"
+          name="nome"
+          id="nome-pessoa"
+          required
+        />
+        <label for="nome-pessoa" class="form__label">Nome</label>
+      </div>
+      <div class="form__group field">
+        <input
+          type="text"
+          class="form__field"
+          placeholder="CPF"
+          name="cpf"
+          id="cpf"
+          required
+          autocomplete="off"
+        />
+        <label for="cpf" class="form__label">CPF</label>
+      </div>
+      <div class="form__group">
+        <button type="submit" id="bntn-search" class="btn-submit">
+          <span class="material-icons">search</span>
+        </button>
+      </div>
+    </form>
+
+    <h2>Resultados:</h2>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Data</th>
+          <th>Valor Total</th>
+        </tr>
+      </thead>
+      <tbody id="results-body-pessoa">
+        <!-- Resultados serão injetados aqui -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Formulário para Consulta de Produtos -->
+  <div id="form-consulta-produto">
+    <h1>Consulta</h1>
+    <h2>Produtos:</h2>
+    <div id="consulta-form-produto" class="form-group-container">
+      <div class="form__group field">
+        <input
+          type="text"
+          class="form__field"
+          placeholder="Nome"
+          name="nome"
+          id="nome-produto"
+          required
+        />
+        <label for="nome-produto" class="form__label">Nome</label>
+      </div>
+      <div class="form__group field">
+        <label for="material" class="form__label">Material</label>
+        <input type="hidden" id="material" name="material" />
+        <div id="dropdownContainer">
+          <div id="selectedMaterial" class="dropdown-placeholder">
+            Selecione o Material
+          </div>
+          <div  id="dropdownMenu" class="dropdown-content">
+            <div class="option" data-value="Tudo">Tudo</div>
+            <div class="option" data-value="Aço">Aço</div>
+            <div class="option" data-value="Titânio">Titânio</div>
+            <div class="option" data-value="Silicone">Silicone</div>
+            <div class="option" data-value="Bioflex">Bioflex</div>
+          </div>
+        </div>
+      </div>
+      <div class="form__group">
+        <button type="submit" id="bntn-search-produto" class="btn-submit">
+          <span class="material-icons">search</span>
+        </button>
+      </div>
+    </div>
+
+    <h2>Resultados:</h2>
+    <table class="results-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Material</th>
+          <th>Quantidade</th>
+          <th>Valor vendido</th>
+          <th>Valor atacado</th>
+        </tr>
+      </thead>
+      <tbody id="results-body-produto">
+        <!-- Resultados serão injetados aqui -->
+      </tbody>
+    </table>
+  </div>
+</div>
