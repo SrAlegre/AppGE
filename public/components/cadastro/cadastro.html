@@ -1,0 +1,450 @@
+<div class="layout">
+    <div id="Cadastro" class="conteiner">
+      <div class="switch-container">
+        <span class="label-left">Produto</span>
+        <label class="switch">
+          <input id="selectRegister" type="checkbox" />
+          <span class="slider"></span>
+        </label>
+        <span class="label-right">Pessoa</span>
+      </div>
+
+      <h1>Registro</h1>
+      <form id="registerForm" action="register">
+        <h2>Dados Pessoais:</h2>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Nome Completo"
+            name="name"
+            id="name"
+            required
+          />
+          <label for="name" class="form__label">Nome Completo</label>
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="CPF"
+            name="CPF"
+            id="CPF"
+            required
+          />
+          <label for="CPF" class="form__label">CPF</label>
+        </div>
+        <div class="form__group">
+          <input
+            type="date"
+            id="birthdate"
+            class="form__field"
+            placeholder="Data de Nascimento"
+            name="birthdate"
+            required
+          />
+          <label for="birthdate" class="form__label"
+            >Data de Nascimento</label
+          >
+        </div>
+        <div class="form__group">
+          <input
+            type="text"
+            id="phone"
+            class="form__field"
+            placeholder="Telefone"
+            name="phone"
+            required
+          />
+          <label for="phone" class="form__label">Telefone</label>
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Endereço"
+            name="address"
+            id="address"
+            required
+          />
+          <label for="address" class="form__label">Endereço</label>
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Instagram"
+            name="Instagram"
+            id="Instagram"
+            required
+          />
+          <label for="Instagram" class="form__label">Instagram</label>
+        </div>
+        <h3>Em Relação à Saúde:</h3>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Alergia"
+            name="alergia"
+            id="alergia"
+            required
+          />
+          <label for="alergia" class="form__label"
+            >Possui alguma alergia? Se sim, quais?</label
+          >
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Pele/Cicatrização"
+            name="peleCicatrizacao"
+            id="peleCicatrizacao"
+            required
+          />
+          <label for="peleCicatrizacao" class="form__label"
+            >Possui algum problema de pele/cicatrização? Se sim, quais?</label
+          >
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Cirurgia"
+            name="cirurgia"
+            id="cirurgia"
+            required
+          />
+          <label for="cirurgia" class="form__label"
+            >Já fez alguma cirurgia? Se sim, quais?</label
+          >
+        </div>
+        <div class="form__group">
+          <label class="form__label">Possui alguma IST?</label>
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="ist_yes"
+              name="ist"
+              class="form__radio-input"
+              value="sim"
+              required
+            />
+            <label for="ist_yes" class="form__radio-label">Sim</label>
+            <input
+              type="radio"
+              id="ist_no"
+              name="ist"
+              class="form__radio-input"
+              value="nao"
+              required
+            />
+            <label for="ist_no" class="form__radio-label">Não</label>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label">É portador de Hepatites?</label>
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="hepatites_yes"
+              name="hepatites"
+              class="form__radio-input"
+              value="sim"
+              required
+            />
+            <label for="hepatites_yes" class="form__radio-label">Sim</label>
+            <input
+              type="radio"
+              id="hepatites_no"
+              name="hepatites"
+              class="form__radio-input"
+              value="nao"
+              required
+            />
+            <label for="hepatites_no" class="form__radio-label">Não</label>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label"
+            >Possui problema cardíaco ou circulatório?</label
+          >
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="cardiaco_yes"
+              name="cardiaco"
+              class="form__radio-input"
+              value="sim"
+              required
+            />
+            <label for="cardiaco_yes" class="form__radio-label">Sim</label>
+            <input
+              type="radio"
+              id="cardiaco_no"
+              name="cardiaco"
+              class="form__radio-input"
+              value="nao"
+              required
+            />
+            <label for="cardiaco_no" class="form__radio-label">Não</label>
+          </div>
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Medicamento"
+            name="medicamento"
+            id="medicamento"
+            required
+          />
+          <label for="medicamento" class="form__label"
+            >Está fazendo uso de medicamento? Se sim, qual?</label
+          >
+        </div>
+        <div class="form__group">
+          <label class="form__label">Possui diabetes?</label>
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="diabetes_yes"
+              name="diabetes"
+              class="form__radio-input"
+              value="sim"
+              required
+            />
+            <label for="diabetes_yes" class="form__radio-label">Sim</label>
+            <input
+              type="radio"
+              id="diabetes_no"
+              name="diabetes"
+              class="form__radio-input"
+              value="nao"
+              required
+            />
+            <label for="diabetes_no" class="form__radio-label">Não</label>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Possui epilepsia?</label>
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="epilepsia_yes"
+              name="epilepsia"
+              class="form__radio-input"
+              value="sim"
+              required
+            />
+            <label for="epilepsia_yes" class="form__radio-label">Sim</label>
+            <input
+              type="radio"
+              id="epilepsia_no"
+              name="epilepsia"
+              class="form__radio-input"
+              value="nao"
+              required
+            />
+            <label for="epilepsia_no" class="form__radio-label">Não</label>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label"
+            >Possui hemofilia? (sangramento excessivo)</label
+          >
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="hemofilia_yes"
+              name="hemofilia"
+              class="form__radio-input"
+              value="sim"
+              required
+            />
+            <label for="hemofilia_yes" class="form__radio-label">Sim</label>
+            <input
+              type="radio"
+              id="hemofilia_no"
+              name="hemofilia"
+              class="form__radio-input"
+              value="nao"
+              required
+            />
+            <label for="hemofilia_no" class="form__radio-label">Não</label>
+          </div>
+        </div>
+        <div class="form__group">
+          <label class="form__label">Possui pressão...</label>
+          <div class="form__radio-group">
+            <input
+              type="radio"
+              id="pressao_normal"
+              name="pressao"
+              class="form__radio-input"
+              value="normal"
+              required
+            />
+            <label for="pressao_normal" class="form__radio-label"
+              >Normal</label
+            >
+            <input
+              type="radio"
+              id="pressao_alta"
+              name="pressao"
+              class="form__radio-input"
+              value="alta"
+              required
+            />
+            <label for="pressao_alta" class="form__radio-label">Alta</label>
+            <input
+              type="radio"
+              id="pressao_baixa"
+              name="pressao"
+              class="form__radio-input"
+              value="baixa"
+              required
+            />
+            <label for="pressao_baixa" class="form__radio-label">Baixa</label>
+          </div>
+        </div>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Conheceu"
+            name="conheceu"
+            id="conheceu"
+            required
+          />
+          <label for="conheceu" class="form__label"
+            >Como conheceu o estudio?</label
+          >
+        </div>
+        <h3>Serviço:</h3>
+        <div class="Servico">
+          <div class="product-selection">
+            <select id="product-dropdown">
+              <option value="servico1,10,MaterialA">servico1</option>
+              <option value="servico2,20,MaterialB">servico2</option>
+              <option value="servico3,30,MaterialC">servico3</option>
+            </select>
+            <div class="quantity-selector">
+              <button id="decrement">-</button>
+              <span id="quantity">1</span>
+              <button id="increment">+</button>
+            </div>
+            <button type="button" id="add-product">Adicionar</button>
+          </div>
+
+          <table id="product-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Material</th>
+                <th>Quantidade</th>
+                <th>Local</th>
+                <th>Remover</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Produtos adicionados serão inseridos aqui -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="form__group">
+          <input type="submit" value="Enviar" class="btn-submit" />
+        </div>
+      </form>
+      <form id="registerJoia">
+        <h2>Produtos:</h2>
+        <div class="form__group field">
+          <input
+            type="input"
+            class="form__field"
+            placeholder="Nome"
+            name="nome"
+            id="nome"
+            required
+          />
+          <label for="nome" class="form__label">nome</label>
+        </div>
+        <div class="numeros">
+          <div class="form__group field input-container">
+            <label for="preco_de_atacado" class="form__label">Preço de atacado</label>
+            <input
+              type="text"
+              class="form__field preco_de_atacado"
+              placeholder="Preço atacado"
+              name="preco_de_atacado"
+              id="preco_de_atacado"
+              required
+              step="1.0"
+              min="0,00"
+              max="999,999"
+              value="0,00"
+              maxlength="10"
+              oninput="formatarPreco(this)"
+            />
+          </div>
+          <div class="form__group field input-container">
+            <label for="preco" class="form__label">Preço cliente</label>
+            <input
+              type="text"
+              class="form__field"
+              placeholder="Preço"
+              name="preco"
+              id="preco"
+              required
+              step="1.0"
+              
+              min="0,00"
+              max="999,999"
+              value="0,00"
+              maxlength="10"
+              oninput="formatarPreco(this)"
+            />
+          </div>
+          <div class="form__group field">
+            <label for="quantidade" class="form__label">Quantidade de Joias</label>
+            <input
+              type="number"
+              class="form__field"
+              placeholder="Quantidade"
+              name="quantidade"
+              id="quantidade"
+              min="1"
+              step="1"
+              required
+              value="1"
+            />
+          </div>
+        </div>
+
+        <div class="form__group field">
+          <input
+              type="input"
+              class="form__field"
+              placeholder="Material"
+              name="material"
+              id="material"
+              required
+              autocomplete="off"
+          />
+          <label for="material" class="form__label">Material</label>
+          <div id="dropdownMenu" class="dropdown-content">
+              <div class="option" data-value="Aço">Aço</div>
+              <div class="option" data-value="Titânio">Titânio</div>
+              <div class="option" data-value="Silicone">Silicone</div>
+              <div class="option" data-value="Bioflex">Bioflex</div>
+          </div>
+      </div>
+        <div class="form__group">
+          <input type="submit" value="Enviar" class="btn-submit" />
+        </div>
+      </form>
+    </div>
+  </div>
