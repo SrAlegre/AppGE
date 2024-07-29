@@ -17,7 +17,7 @@ connection.connect((err) => {
 function convertToBoolean(value) {
   return value === "sim" ? 1 : 0;
 }
-
+//teste
 // Função para converter vírgula para ponto em valores decimais
 function formatDecimal(value) {
   if (typeof value === "string") {
