@@ -378,3 +378,29 @@
   #material,#dropdownMenu{
     width: 50%;
   }
+  
+.btn-submit:hover {
+  background: var(--color-7);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+.dropdown-content {
+  position: relative;
+  display: none;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #f1f1f1;
+}
+
+.selected {
+  background-color: #d4acfb;
+  color: white;
+}

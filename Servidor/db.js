@@ -17,11 +17,11 @@ connection.connect((err) => {
 function convertToBoolean(value) {
   return value === "sim" ? 1 : 0;
 }
-
+//teste
 // Função para converter vírgula para ponto em valores decimais
 function formatDecimal(value) {
-  if (typeof value === 'string') {
-    return value.replace(',', '.');
+  if (typeof value === "string") {
+    return value.replace(",", ".");
   }
   // Se não for string, retorne o valor original ou trate de outra forma
   return value;
@@ -115,7 +115,16 @@ function cadastrarCliente(cliente, callback) {
 
       connection.query(
         insertClienteQuery,
-        [name,CPF, birthdate, phone, address, Instagram, conheceu, id_anaminese],
+        [
+          name,
+          CPF,
+          birthdate,
+          phone,
+          address,
+          Instagram,
+          conheceu,
+          id_anaminese,
+        ],
         (err, results) => {
           if (err) return callback(err);
 
@@ -124,7 +133,6 @@ function cadastrarCliente(cliente, callback) {
           // Se o cliente tiver serviços, associe-os
           if (servico && servico.length > 0) {
             servico.forEach((produto) => {
-
               console.log("nome obtido", produto.nome);
               obterIdProdutoPorNome(produto.name, (err, id_produto) => {
                 if (err) {
@@ -137,9 +145,15 @@ function cadastrarCliente(cliente, callback) {
                     produto.local,
                     (err, id_servico) => {
                       if (err) {
-                        console.error("Erro ao associar produto ao serviço:", err);
+                        console.error(
+                          "Erro ao associar produto ao serviço:",
+                          err
+                        );
                       } else {
-                        console.log("Serviço associado com sucesso, ID:", id_servico);
+                        console.log(
+                          "Serviço associado com sucesso, ID:",
+                          id_servico
+                        );
                       }
                     }
                   );
@@ -154,7 +168,71 @@ function cadastrarCliente(cliente, callback) {
     }
   );
 }
+function consultaCliente(nome, callback) {
+  const sql = `
+    SELECT 
+      c.nome, 
+      c.cpf, 
+      s.data_servico AS data, 
+      SUM(p.preco * s.quantidade) AS valor 
+    FROM 
+      servico s
+      JOIN cliente c ON s.id_cliente = c.id_cliente
+      JOIN produtos p ON s.id_produto = p.id_produto
+    WHERE 
+      c.nome LIKE ?
+    GROUP BY 
+      c.nome, c.cpf, s.data_servico
+  `;
+  const values = [`%${nome}%`];
 
+  connection.query(sql, values, (error, results) => {
+    if (error) {
+      console.error("Erro ao buscar dados:", error);
+      callback(error, null);
+      return;
+    }
+    callback(null, results);
+  });
+}
+
+function consultaProduto(nome = "", material = "", callback) {
+  let sql = `
+  SELECT 
+    p.nome, 
+    p.material, 
+    p.quantidade, 
+    p.preco,
+    p.preco_de_atacado 
+  FROM 
+    produtos p
+  WHERE 
+    1 = 1
+`;
+
+  let values = [];
+
+  // Adiciona filtro para o nome apenas se ele não for vazio
+  if (nome.trim() !== "") {
+    sql += " AND p.nome LIKE ?";
+    values.push(`%${nome}%`);
+  }
+
+  // Adiciona o filtro de material apenas se material não for 'Tudo'
+  if (material && material !== "Tudo") {
+    sql += " AND p.material LIKE ?";
+    values.push(`%${material}%`);
+  }
+
+  connection.query(sql, values, (error, results) => {
+    if (error) {
+      console.error("Erro ao buscar produtos:", error);
+      callback(error, null);
+      return;
+    }
+    callback(null, results);
+  });
+}
 
 // function obterIdProdutoPorNome(nome, callback) {
 //   const query = "SELECT id_produto FROM produtos WHERE nome = ?";
@@ -170,21 +248,22 @@ function cadastrarCliente(cliente, callback) {
 //   });
 // }
 
-
-
-
-
 // Função para Associar Produto ao Serviço (Serviço do Cliente)
-function associarProdutoServico(id_cliente, id_produto, quantidade,local, callback) {
+function associarProdutoServico(
+  id_cliente,
+  id_produto,
+  quantidade,
+  local,
+  callback
+) {
   const insertServicoQuery = `
     INSERT INTO servico (id_cliente, id_produto, quantidade,local)
     VALUES (?, ?, ?,?)
   `;
 
-
   connection.query(
     insertServicoQuery,
-    [id_cliente, id_produto, quantidade,local],
+    [id_cliente, id_produto, quantidade, local],
     (err, results) => {
       if (err) return callback(err);
       callback(null, results.insertId);
@@ -264,10 +343,9 @@ module.exports = {
   cadastrarCliente,
   cadastrarProduto,
   getProducts,
+  consultaCliente,
+  consultaProduto,
 };
-
-
-
 
 function obterIdProdutoPorNome(nome, callback) {
   console.log(`Buscando id_produto para o nome: '${nome}'`); // Log para depuração
@@ -279,7 +357,7 @@ function obterIdProdutoPorNome(nome, callback) {
       callback(err, null);
       return;
     }
-    console.log('Resultados da busca:', results); // Log para depuração
+    console.log("Resultados da busca:", results); // Log para depuração
 
     if (results.length > 0) {
       const id_produto = results[0].id_produto;
